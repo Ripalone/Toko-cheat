@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Warung Toko Cheat - Level Up Your Game</title>
-    <!-- Menggunakan Tailwind CSS CDN untuk tampilan modern & responsif -->
+    <!-- Menggunakan Tailwind CSS CDN untuk tampilan modern -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         body {
@@ -22,7 +22,7 @@
                 🏪 WARUNG <span class="text-amber-400">TOKO CHEAT</span>
             </h1>
             <span class="bg-green-500/10 text-green-400 text-xs px-3 py-1 rounded-full border border-green-500/20 font-mono flex items-center gap-1">
-                <span class="h-2 w-2 rounded-full bg-green-400 animate-pulse"></span> Server Online
+                <span class="h-2 w-2 rounded-full bg-green-400 animate-pulse"></span> Mode Simulasi Aktif
             </span>
         </div>
     </header>
@@ -36,7 +36,7 @@
                 Cheat Premium, Harga Warungan
             </h2>
             <p class="text-gray-400 max-w-xl mx-auto">
-                Proses instan, anti-ban (tergantung pemakaian), dan pastinya bikin lo jadi penguasa lobi instant. Pilih paket lo di bawah!
+                [SIMULASI] Pilih paket, masukkan kode promo, dan lakukan pembayaran instan via QRIS Demo.
             </p>
         </div>
 
@@ -118,35 +118,77 @@
         </div>
     </main>
 
-    <!-- MODAL PEMBELIAN (POPUP) -->
+    <!-- MODAL POPUP (PEMBELIAN & SCAN QRIS) -->
     <div id="modalBeli" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden z-50">
-        <div class="bg-gray-900 border border-gray-800 w-full max-w-md rounded-2xl p-6 relative">
+        <div class="bg-gray-900 border border-gray-800 w-full max-w-md rounded-2xl p-6 relative shadow-2xl">
             
-            <button onclick="tutupModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white text-xl">&times;</button>
+            <!-- Tombol Close -->
+            <button id="btnTutup" onclick="tutupModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white text-xl">&times;</button>
             
-            <h4 class="text-xl font-bold mb-1 text-white">Detail Pembelian</h4>
-            <p id="namaItem" class="text-gray-400 font-medium mb-6">Nama Cheat Sesuai Klik</p>
-            
-            <!-- Input Kode Promo -->
-            <div class="mb-6">
-                <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Kode Promo (Opsional)</label>
-                <div class="flex gap-2">
-                    <input type="text" id="inputPromo" placeholder="Masukkan kode promo..." class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-cyan-500 uppercase font-mono">
-                    <button onclick="cekPromo()" class="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-4 py-2 rounded-xl text-sm transition">Pakai</button>
+            <!-- STEP 1: FORM INPUT KODE PROMO -->
+            <div id="stepForm">
+                <h4 class="text-xl font-bold mb-1 text-white">Detail Pembelian</h4>
+                <p id="namaItem" class="text-gray-400 font-medium mb-6">Nama Cheat</p>
+                
+                <div class="mb-6">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Kode Promo (Opsional)</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="inputPromo" placeholder="Masukkan kode promo..." class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-cyan-500 uppercase font-mono">
+                        <button onclick="cekPromo()" class="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-4 py-2 rounded-xl text-sm transition">Pakai</button>
+                    </div>
+                    <p id="pesanPromo" class="text-xs mt-2 hidden"></p>
                 </div>
-                <p id="pesanPromo" class="text-xs mt-2 hidden"></p>
+
+                <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 flex justify-between items-center mb-6">
+                    <span class="text-sm text-gray-400">Total Bayar:</span>
+                    <span id="totalHarga" class="text-xl font-mono font-bold text-green-400">Rp 0</span>
+                </div>
+
+                <button onclick="pindahKeQRIS()" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-black font-extrabold py-4 rounded-xl tracking-wide shadow-lg transition">
+                    BAYAR SEKARANG via QRIS
+                </button>
             </div>
 
-            <!-- Total Harga -->
-            <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 flex justify-between items-center mb-6">
-                <span class="text-sm text-gray-400">Total Bayar:</span>
-                <span id="totalHarga" class="text-xl font-mono font-bold text-green-400">Rp 0</span>
+            <!-- STEP 2: DISPLAY QRIS & TIMER -->
+            <div id="stepQRIS" class="hidden text-center py-4">
+                <h4 class="text-lg font-bold text-white mb-2">Pindai QRIS Simulasi</h4>
+                <p class="text-xs text-gray-400 mb-4">Silakan tunggu 30 detik setelah QRIS muncul untuk verifikasi otomatis</p>
+                
+                <!-- Placeholder Box QRIS Palsu -->
+                <div class="bg-white p-4 w-48 h-48 mx-auto rounded-xl flex flex-col items-center justify-center shadow-lg relative border-4 border-cyan-400">
+                    <!-- Ilustrasi Kotak QR Code Mockup -->
+                    <div class="w-full h-full border-4 border-dashed border-gray-800 flex flex-col justify-between p-2">
+                        <div class="flex justify-between w-full"><div class="w-8 h-8 bg-black"></div><div class="w-8 h-8 bg-black"></div></div>
+                        <span class="text-black font-mono font-black text-xs tracking-widest">QRIS FAKE</span>
+                        <div class="flex justify-between w-full"><div class="w-8 h-8 bg-black"></div><div class="w-4 h-4 bg-black self-end"></div></div>
+                    </div>
+                </div>
+                
+                <!-- Timer Countdown -->
+                <div class="mt-6">
+                    <p class="text-sm text-gray-400">Memverifikasi pembayaran dalam:</p>
+                    <p id="countdownText" class="text-3xl font-mono font-black text-amber-400 mt-1">30s</p>
+                </div>
             </div>
 
-            <!-- Tombol Aksi -->
-            <button onclick="prosesBayar()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-black font-extrabold py-4 rounded-xl tracking-wide shadow-lg transition">
-                BAYAR SEKARANG via WhatsApp
-            </button>
+            <!-- STEP 3: SUKSES & MUNCUL KEY LISENSI -->
+            <div id="stepSukses" class="hidden text-center py-6">
+                <div class="w-16 h-16 bg-green-500/10 border border-green-500/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-green-400 text-3xl">✓</span>
+                </div>
+                <h4 class="text-2xl font-black text-green-400 mb-2">Pembayaran Sukses!</h4>
+                <p class="text-sm text-gray-400 mb-6">Terima kasih, pembayaran simulasi berhasil diverifikasi.</p>
+                
+                <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 text-left">
+                    <label class="block text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">Your Serial Key:</label>
+                    <div class="flex items-center justify-between bg-gray-900 px-3 py-2 rounded-lg border border-gray-800">
+                        <code id="keyResult" class="text-amber-400 font-mono font-bold tracking-wider text-lg">337739373</code>
+                        <button onclick="copyKey()" class="text-xs bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded text-gray-300">Copy</button>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">Simpan key di atas untuk mengaktifkan cheat di dalam client loader.</p>
+            </div>
+
         </div>
     </div>
 
@@ -157,6 +199,7 @@
         let itemSekarang = "";
         let promoBisaDigunakan = false;
         let diskonAktif = false;
+        let timerInterval = null;
 
         function formatRupiah(angka) {
             return "Rp " + angka.toLocaleString('id-ID');
@@ -168,6 +211,13 @@
             hargaTotal = harga;
             promoBisaDigunakan = bisaPromo;
             diskonAktif = false;
+            clearInterval(timerInterval); // Reset jika ada timer menggantung
+            
+            // Set Tampilan Awal Step 1
+            document.getElementById('stepForm').classList.remove('hidden');
+            document.getElementById('stepQRIS').classList.add('hidden');
+            document.getElementById('stepSukses').classList.add('hidden');
+            document.getElementById('btnTutup').classList.remove('hidden');
             
             // Reset input modal
             document.getElementById('namaItem').innerText = nama;
@@ -180,6 +230,7 @@
         }
 
         function tutupModal() {
+            clearInterval(timerInterval);
             document.getElementById('modalBeli').classList.add('hidden');
         }
 
@@ -191,8 +242,7 @@
 
             if (kode === "AFFAIYACIT") {
                 if (promoBisaDigunakan) {
-                    // Potongan diskon (Contoh: Diskon 20% buat Drip Client 3 Hari)
-                    const potongan = 5000; // Diskon Rp 5.000, harga jadi 20.000
+                    const potongan = 5000; 
                     hargaTotal = hargaAsli - potongan;
                     diskonAktif = true;
                     
@@ -213,19 +263,40 @@
             }
         }
 
-        function prosesBayar() {
-            // Ubah nomor WA di bawah ini jadi nomor WA toko lo sendiri (Ganti setelah 62)
-            const nomorWA = "6281234567890"; 
-            const promoDigunakan = diskonAktif ? "Ya (AFFAIYACIT)" : "Tidak Ada";
-            
-            const teksPesan = `Halo Toko Cheat, saya mau beli:\n\n` +
-                              `🛒 Item: ${itemSekarang}\n` +
-                              `🎫 Promo: ${promoDigunakan}\n` +
-                              `💰 Total Bayar: ${formatRupiah(hargaTotal)}\n\n` +
-                              `Mohon infokan metode pembayarannya bos!`;
-            
-            const urlWA = `https://api.whatsapp.com/send?phone=${nomorWA}&text=${encodeURIComponent(teksPesan)}`;
-            window.open(urlWA, '_blank');
+        // FUNGSI KHUSUS SIMULASI QRIS & COOLDOWN
+        function pindahKeQRIS() {
+            // Sembunyikan Form, Tampilkan QRIS Screen
+            document.getElementById('stepForm').classList.add('hidden');
+            document.getElementById('stepQRIS').classList.remove('hidden');
+            // Kunci tombol close selama proses pembayaran simulasi biar dramatis
+            document.getElementById('btnTutup').classList.add('hidden');
+
+            let waktuSisa = 30;
+            document.getElementById('countdownText').innerText = waktuSisa + "s";
+
+            // Jalankan Interfal Hitung Mundur 30 Detik
+            timerInterval = setInterval(() => {
+                waktuSisa--;
+                document.getElementById('countdownText').innerText = waktuSisa + "s";
+
+                if (waktuSisa <= 0) {
+                    clearInterval(timerInterval);
+                    munculkanKey();
+                }
+            }, 1000);
+        }
+
+        function munculkanKey() {
+            // Sembunyikan QRIS Screen, Tampilkan Sukses & Key
+            document.getElementById('stepQRIS').classList.add('hidden');
+            document.getElementById('stepSukses').classList.remove('hidden');
+            document.getElementById('btnTutup').classList.remove('hidden'); // Munculkan kembali tombol close
+        }
+
+        function copyKey() {
+            const keyText = document.getElementById('keyResult').innerText;
+            navigator.clipboard.writeText(keyText);
+            alert("Key lisensi berhasil dicopy: " + keyText);
         }
     </script>
 </body>
