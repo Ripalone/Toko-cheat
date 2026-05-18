@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warung Toko Cheat - Level Up Your Game</title>
+    <!-- Menggunakan Tailwind CSS CDN untuk tampilan modern & responsif -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <!-- Header / Navbar -->
+    <header class="border-b border-gray-800 bg-gray-900/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-extrabold tracking-wider text-cyan-400">
+                🏪 WARUNG <span class="text-amber-400">TOKO CHEAT</span>
+            </h1>
+            <span class="bg-green-500/10 text-green-400 text-xs px-3 py-1 rounded-full border border-green-500/20 font-mono flex items-center gap-1">
+                <span class="h-2 w-2 rounded-full bg-green-400 animate-pulse"></span> Server Online
+            </span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-12">
+        
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-cyan-400 via-amber-400 to-purple-500 bg-clip-text text-transparent">
+                Cheat Premium, Harga Warungan
+            </h2>
+            <p class="text-gray-400 max-w-xl mx-auto">
+                Proses instan, anti-ban (tergantung pemakaian), dan pastinya bikin lo jadi penguasa lobi instant. Pilih paket lo di bawah!
+            </p>
+        </div>
+
+        <!-- Grid Menu Cheat -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- KARTU 1: DRIP CLIENT -->
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 flex flex-col justify-between shadow-xl hover:border-cyan-500/50 transition duration-300">
+                <div>
+                    <div class="text-cyan-400 text-3xl mb-3">💧</div>
+                    <h3 class="text-xl font-bold mb-2">Drip Client</h3>
+                    <p class="text-gray-400 text-sm mb-6">Fitur bypass tingkat tinggi, cocok buat turnamen harian.</p>
+                    <hr class="border-gray-800 mb-6">
+                </div>
+                <div class="space-y-3">
+                    <button onclick="bukaModal('Drip Client (1 Hari)', 13000, false)" class="w-full text-left bg-gray-800 hover:bg-gray-700 px-4 py-3 rounded-xl flex justify-between items-center transition">
+                        <span class="font-medium text-sm">1 Hari</span>
+                        <span class="text-cyan-400 font-mono font-bold">Rp 13.000</span>
+                    </button>
+                    <button onclick="bukaModal('Drip Client (3 Hari)', 25000, true)" class="w-full text-left bg-gradient-to-r from-cyan-950 to-gray-800 hover:from-cyan-900 border border-cyan-500/30 px-4 py-3 rounded-xl flex justify-between items-center transition relative overflow-hidden group">
+                        <span class="font-medium text-sm z-10">3 Hari <span class="text-xs bg-amber-400 text-black px-1.5 py-0.5 rounded ml-1 font-bold">PROMO AVAIL</span></span>
+                        <span class="text-cyan-400 font-mono font-bold z-10">Rp 25.000</span>
+                    </button>
+                    <button onclick="bukaModal('Drip Client (30 Hari)', 150000, false)" class="w-full text-left bg-gray-800 hover:bg-gray-700 px-4 py-3 rounded-xl flex justify-between items-center transition">
+                        <span class="font-medium text-sm">30 Hari</span>
+                        <span class="text-cyan-400 font-mono font-bold">Rp 150.000</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- KARTU 2: BR MODS -->
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 flex flex-col justify-between shadow-xl hover:border-purple-500/50 transition duration-300">
+                <div>
+                    <div class="text-purple-400 text-3xl mb-3">🔥</div>
+                    <h3 class="text-xl font-bold mb-2">BR Mods</h3>
+                    <p class="text-gray-400 text-sm mb-6">Auto aim, wallhack tembus pandang buat game Battle Royale favorit lo.</p>
+                    <hr class="border-gray-800 mb-6">
+                </div>
+                <div class="space-y-3">
+                    <button onclick="bukaModal('BR Mods (1 Hari)', 25000, false)" class="w-full text-left bg-gray-800 hover:bg-gray-700 px-4 py-3 rounded-xl flex justify-between items-center transition">
+                        <span class="font-medium text-sm">1 Hari</span>
+                        <span class="text-purple-400 font-mono font-bold">Rp 25.000</span>
+                    </button>
+                    <button onclick="bukaModal('BR Mods (4 Hari)', 50000, false)" class="w-full text-left bg-gray-800 hover:bg-gray-700 px-4 py-3 rounded-xl flex justify-between items-center transition">
+                        <span class="font-medium text-sm">4 Hari</span>
+                        <span class="text-purple-400 font-mono font-bold">Rp 50.000</span>
+                    </button>
+                    <button onclick="bukaModal('BR Mods (30 Hari)', 200000, false)" class="w-full text-left bg-gray-800 hover:bg-gray-700 px-4 py-3 rounded-xl flex justify-between items-center transition">
+                        <span class="font-medium text-sm">30 Hari</span>
+                        <span class="text-purple-400 font-mono font-bold">Rp 200.000</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- KARTU 3: MOBILE LEGENDS -->
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 flex flex-col justify-between shadow-xl hover:border-amber-500/50 transition duration-300">
+                <div>
+                    <div class="text-amber-400 text-3xl mb-3">⚔️</div>
+                    <h3 class="text-xl font-bold mb-2">Mobile Legends</h3>
+                    <p class="text-gray-400 text-sm mb-6">Map hack, unlock all skin, and auto combo anti ribet.</p>
+                    <hr class="border-gray-800 mb-6">
+                </div>
+                <div class="space-y-3">
+                    <button onclick="bukaModal('Mobile Legends (1 Hari)', 15000, false)" class="w-full text-left bg-gray-800 hover:bg-gray-700 px-4 py-3 rounded-xl flex justify-between items-center transition">
+                        <span class="font-medium text-sm">1 Hari</span>
+                        <span class="text-amber-400 font-mono font-bold">Rp 15.000</span>
+                    </button>
+                    <button onclick="bukaModal('Mobile Legends (3 Hari)', 45000, false)" class="w-full text-left bg-gray-800 hover:bg-gray-700 px-4 py-3 rounded-xl flex justify-between items-center transition">
+                        <span class="font-medium text-sm">3 Hari</span>
+                        <span class="text-amber-400 font-mono font-bold">Rp 45.000</span>
+                    </button>
+                    <button onclick="bukaModal('Mobile Legends (30 Hari)', 250000, false)" class="w-full text-left bg-gray-800 hover:bg-gray-700 px-4 py-3 rounded-xl flex justify-between items-center transition">
+                        <span class="font-medium text-sm">30 Hari</span>
+                        <span class="text-amber-400 font-mono font-bold">Rp 250.000</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- MODAL PEMBELIAN (POPUP) -->
+    <div id="modalBeli" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-gray-900 border border-gray-800 w-full max-w-md rounded-2xl p-6 relative">
+            
+            <button onclick="tutupModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white text-xl">&times;</button>
+            
+            <h4 class="text-xl font-bold mb-1 text-white">Detail Pembelian</h4>
+            <p id="namaItem" class="text-gray-400 font-medium mb-6">Nama Cheat Sesuai Klik</p>
+            
+            <!-- Input Kode Promo -->
+            <div class="mb-6">
+                <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Kode Promo (Opsional)</label>
+                <div class="flex gap-2">
+                    <input type="text" id="inputPromo" placeholder="Masukkan kode promo..." class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-cyan-500 uppercase font-mono">
+                    <button onclick="cekPromo()" class="bg-cyan-500 hover:bg-cyan-600 text-black font-bold px-4 py-2 rounded-xl text-sm transition">Pakai</button>
+                </div>
+                <p id="pesanPromo" class="text-xs mt-2 hidden"></p>
+            </div>
+
+            <!-- Total Harga -->
+            <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 flex justify-between items-center mb-6">
+                <span class="text-sm text-gray-400">Total Bayar:</span>
+                <span id="totalHarga" class="text-xl font-mono font-bold text-green-400">Rp 0</span>
+            </div>
+
+            <!-- Tombol Aksi -->
+            <button onclick="prosesBayar()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-black font-extrabold py-4 rounded-xl tracking-wide shadow-lg transition">
+                BAYAR SEKARANG via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- LOGIKA JAVASCRIPT -->
+    <script>
+        let hargaAsli = 0;
+        let hargaTotal = 0;
+        let itemSekarang = "";
+        let promoBisaDigunakan = false;
+        let diskonAktif = false;
+
+        function formatRupiah(angka) {
+            return "Rp " + angka.toLocaleString('id-ID');
+        }
+
+        function bukaModal(nama, harga, bisaPromo) {
+            itemSekarang = nama;
+            hargaAsli = harga;
+            hargaTotal = harga;
+            promoBisaDigunakan = bisaPromo;
+            diskonAktif = false;
+            
+            // Reset input modal
+            document.getElementById('namaItem').innerText = nama;
+            document.getElementById('totalHarga').innerText = formatRupiah(hargaTotal);
+            document.getElementById('inputPromo').value = "";
+            document.getElementById('pesanPromo').classList.add('hidden');
+            
+            // Tampilkan modal
+            document.getElementById('modalBeli').classList.remove('hidden');
+        }
+
+        function tutupModal() {
+            document.getElementById('modalBeli').classList.add('hidden');
+        }
+
+        function cekPromo() {
+            const kode = document.getElementById('inputPromo').value.trim().toUpperCase();
+            const pesan = document.getElementById('pesanPromo');
+            
+            pesan.classList.remove('hidden', 'text-green-400', 'text-red-400');
+
+            if (kode === "AFFAIYACIT") {
+                if (promoBisaDigunakan) {
+                    // Potongan diskon (Contoh: Diskon 20% buat Drip Client 3 Hari)
+                    const potongan = 5000; // Diskon Rp 5.000, harga jadi 20.000
+                    hargaTotal = hargaAsli - potongan;
+                    diskonAktif = true;
+                    
+                    pesan.innerText = "🎉 Kode Promo Berhasil! Diskon Rp 5.000 diterapkan.";
+                    pesan.classList.add('text-green-400');
+                    document.getElementById('totalHarga').innerText = formatRupiah(hargaTotal);
+                } else {
+                    pesan.innerText = "❌ Maaf, kode promo ini khusus untuk paket Drip Client 3 Hari.";
+                    pesan.classList.add('text-red-400');
+                    hargaTotal = hargaAsli;
+                    document.getElementById('totalHarga').innerText = formatRupiah(hargaTotal);
+                }
+            } else {
+                pesan.innerText = "❌ Kode promo tidak valid.";
+                pesan.classList.add('text-red-400');
+                hargaTotal = hargaAsli;
+                document.getElementById('totalHarga').innerText = formatRupiah(hargaTotal);
+            }
+        }
+
+        function prosesBayar() {
+            // Ubah nomor WA di bawah ini jadi nomor WA toko lo sendiri (Ganti setelah 62)
+            const nomorWA = "6281234567890"; 
+            const promoDigunakan = diskonAktif ? "Ya (AFFAIYACIT)" : "Tidak Ada";
+            
+            const teksPesan = `Halo Toko Cheat, saya mau beli:\n\n` +
+                              `🛒 Item: ${itemSekarang}\n` +
+                              `🎫 Promo: ${promoDigunakan}\n` +
+                              `💰 Total Bayar: ${formatRupiah(hargaTotal)}\n\n` +
+                              `Mohon infokan metode pembayarannya bos!`;
+            
+            const urlWA = `https://api.whatsapp.com/send?phone=${nomorWA}&text=${encodeURIComponent(teksPesan)}`;
+            window.open(urlWA, '_blank');
+        }
+    </script>
+</body>
+</html>
